@@ -1,0 +1,3 @@
+mode: set
+gitlab.com/malcos/demoapp/a/module_a.go:3.28,5.2 1 1
+gitlab.com/malcos/demoapp/cmd/cmd01.go:9.13,13.2 3 1
