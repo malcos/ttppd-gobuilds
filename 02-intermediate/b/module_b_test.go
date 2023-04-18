@@ -1,10 +1,10 @@
-package a
+package b
 
 import "testing"
 
 func TestMessage(t *testing.T) {
-	got := MessageFromA()
-	expected := "I come from planet A"
+	got := MessageFromB()
+	expected := "I come from planet B!"
 	if got != expected {
 		t.Errorf("Expected %v but got %v", expected, got)
 	}
