@@ -116,7 +116,7 @@ $(GOALS_LOCAL):
 	$(eval CMDNAME=$(lastword $(subst ., ,$@)))
 	$(MAKE) SYMBOLIC=1 build.$(CMDNAME)_$(HOST_OS)_$(HOST_ARCH)
 
-release: clean test.coverage build package
+release: clean test.coverage all package
 
 clean:
 	@rm -f *$(LINKEXT)
