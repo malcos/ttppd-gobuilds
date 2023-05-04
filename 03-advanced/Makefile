@@ -2,13 +2,13 @@
 export GO111MODULE=on
 
 # folder name for output files
-TARGET = target
+TARGET := target
 
 # extension for the symbolic links created in the root folder, use something unique or "clean" may produce collateral damage
-LINKEXT = .link
+LINKEXT := .link
 
 # the home or parent folder for the command(s). It must start with ./ otherwise the go compiler will complain
-CMDHOME = ./cmd-single
+CMDHOME := ./cmd
 
 # the name of command to compile (only used to override default name when in single command mode)
 # CMDNAME =
@@ -34,13 +34,13 @@ CMDHOME = ./cmd-single
 # HOST_ARCH       // build section: the architecture of the machine where the builds are running
 
 # options are "zip", "tgz" and "plain" (no compression), it will be used as default target in the "package" rule
-PACKAGE_COMPRESSION = zip
+PACKAGE_COMPRESSION := tgz
 
 # name of the checksum application to use, it must accept "*.ext" as single parameter to work: like sha256sum, sha1sum or md5sum
-PACKAGE_CHECKSUM = md5sum
+PACKAGE_CHECKSUM := md5sum
 
 # Assign this to version your artifacts (there is a nice additional module I wrote for this as well)
-# VERSION = 1.7.42
+# VERSION := 1.7.42
 
 # you can define your default goal here
 .DEFAULT_GOAL := local
