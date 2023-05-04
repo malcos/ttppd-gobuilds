@@ -83,7 +83,7 @@ GOALS_COMMANDS = $(addprefix command.,$(COMMANDS))
 GOALS_PLATFORMS = $(addprefix platform.,$(PLATFORMS))
 GOALS_LOCAL = $(addprefix local.,$(COMMANDS))
 
-all build: $(GOALS_BUILD)
+all: $(GOALS_BUILD)
 
 # build.CMDNAME_OS_ARCH
 $(GOALS_BUILD):
@@ -111,7 +111,7 @@ local: .symbolic $(foreach command, $(COMMANDS), build.$(command)_$(HOST_OS)_$(H
 .symbolic:
 	$(eval SYMBOLIC=1)
 
-# latest.CMDNAME
+# local.CMDNAME
 $(GOALS_LOCAL):
 	$(eval CMDNAME=$(lastword $(subst ., ,$@)))
 	$(MAKE) SYMBOLIC=1 build.$(CMDNAME)_$(HOST_OS)_$(HOST_ARCH)
