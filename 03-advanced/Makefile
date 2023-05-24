@@ -96,6 +96,9 @@ $(GOALS_BUILD):
 	env GOOS=$(GOOS) GOARCH=$(GOARCH) go build $(BUILDARGS) -o $(TARGET_BINARY) $(COMMAND_SOURCE)
 	$(if $(SYMBOLIC), ln -sf $(TARGET_BINARY) $(CMDNAME)$(LINKEXT))
 
+# only enable command.CMDNAME and platform.OS_ARCH is there are more than one command AND more then one platform defined
+ifeq ($(words $(word 2, $(COMMANDS)) $(word 2, $(PLATFORMS))), 2)
+
 # command.CMDNAME
 $(GOALS_COMMANDS):
 	$(eval CMDNAME=$(lastword $(subst ., ,$@)))
@@ -106,15 +109,22 @@ $(GOALS_PLATFORMS):
 	$(eval OS_ARCH=$(lastword $(subst ., ,$@)))
 	$(MAKE) $(foreach command, $(COMMANDS), build.$(command)_$(OS_ARCH))
 
+endif
+
 local: .symbolic $(foreach command, $(COMMANDS), build.$(command)_$(HOST_OS)_$(HOST_ARCH))
 
 .symbolic:
 	$(eval SYMBOLIC=1)
 
+# enable local.CMDNAME only if there is more than one command defined
+ifneq ($(word 2, $(COMMANDS)),)
+
 # local.CMDNAME
 $(GOALS_LOCAL):
 	$(eval CMDNAME=$(lastword $(subst ., ,$@)))
 	$(MAKE) SYMBOLIC=1 build.$(CMDNAME)_$(HOST_OS)_$(HOST_ARCH)
+
+endif
 
 release: clean test.coverage all package
 
